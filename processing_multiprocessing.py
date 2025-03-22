@@ -9,7 +9,8 @@ def getPhotoAlbumInfoMultiprocessing(number, albumID=None):
 
         photosInfo = getPhotoInfo(number)
         if not photosInfo:
-            return "ERROR AL OBTENER LAS FOTOS DESDE LA URL"
+            logging.error(f"Error inesperado en la consulta: {photosInfo}")
+            return f"Error inesperado en la consulta: {photosInfo}"
 
         with multiprocessing.Pool(processes=multiprocessing.cpu_count()) as pool:
             results = pool.map(process_photo, photosInfo)
